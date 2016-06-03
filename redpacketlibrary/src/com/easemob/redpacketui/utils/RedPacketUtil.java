@@ -225,6 +225,7 @@ public class RedPacketUtil {
                 sendMessage.setTo(message.getTo());
                 sendMessage.setMsgId(UUID.randomUUID().toString());
                 sendMessage.setUnread(false);//去掉未读的显示
+                sendMessage.setMsgTime(cmdMsg.getMsgTime());
                 sendMessage.setDirection(EMMessage.Direct.SEND);
                 sendMessage.setAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, true);
                 sendMessage.setAttribute(RedPacketConstant.EXTRA_RED_PACKET_SENDER_NAME, senderNickname);
@@ -273,6 +274,7 @@ public class RedPacketUtil {
             msg.setMsgId(UUID.randomUUID().toString());
             msg.setDirection(EMMessage.Direct.RECEIVE);
             msg.setUnread(false);//去掉未读的显示
+            msg.setMsgTime(message.getMsgTime());
             msg.setAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, true);
             msg.setAttribute(RedPacketConstant.EXTRA_RED_PACKET_SENDER_NAME, senderNickname);
             msg.setAttribute(RedPacketConstant.EXTRA_RED_PACKET_RECEIVER_NAME, receiverNickname);
