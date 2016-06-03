@@ -14,6 +14,7 @@
 package com.hyphenate.chatuidemo.ui;
 
 import java.util.List;
+import java.util.List;
 
 import com.easemob.redpacketui.RedPacketConstant;
 import com.easemob.redpacketui.utils.RedPacketUtil;
@@ -31,26 +32,31 @@ import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.db.InviteMessgeDao;
 import com.hyphenate.chatuidemo.db.UserDao;
 import com.hyphenate.chatuidemo.domain.InviteMessage;
+import com.hyphenate.chatuidemo.runtimepermissions.PermissionsManager;
+import com.hyphenate.chatuidemo.runtimepermissions.PermissionsResultAction;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,6 +95,18 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+		    String packageName = getPackageName();
+		    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		    if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+		        Intent intent = new Intent();
+		        intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+		        //intent.setAction(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+		        intent.setData(Uri.parse("package:" + packageName));
+		        startActivity(intent);
+		    }
+		}
+		
 		if (savedInstanceState != null && savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED, false)) {
 			// 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 			// 三个fragment里加的判断同理
@@ -104,6 +122,9 @@ public class MainActivity extends BaseActivity {
 			return;
 		}
 		setContentView(R.layout.em_activity_main);
+		//6.0运行时权限处理，target api设成23时，demo这里做的比较简单，直接请求所有需要的运行时权限
+		requestPermissions();
+
 		initView();
 
 		//umeng api
@@ -135,24 +156,23 @@ public class MainActivity extends BaseActivity {
 		EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
 		//内部测试方法，请忽略
         registerInternalDebugReceiver();
-        
-        EMLog.d(TAG, "width:" + getScreenWidth(this) + "  height:" + getScreenHeight(this));
 	}
 
-	public static int getScreenWidth(Context context) {    
-	    WindowManager manager = (WindowManager) context    
-	            .getSystemService(Context.WINDOW_SERVICE);    
-	    Display display = manager.getDefaultDisplay();    
-	    return display.getWidth();    
-	}    
-	//获取屏幕的高度    
-	public static int getScreenHeight(Context context) {    
-	    WindowManager manager = (WindowManager) context    
-	            .getSystemService(Context.WINDOW_SERVICE);    
-	    Display display = manager.getDefaultDisplay();    
-	    return display.getHeight();    
-	} 
-	
+	@TargetApi(23)
+	private void requestPermissions() {
+		PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+			@Override
+			public void onGranted() {
+//				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onDenied(String permission) {
+				//Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
 	/**
 	 * 初始化组件
 	 */
@@ -301,7 +321,7 @@ public class MainActivity extends BaseActivity {
 					if (ChatActivity.activityInstance != null && ChatActivity.activityInstance.toChatUsername != null &&
 							username.equals(ChatActivity.activityInstance.toChatUsername)) {
 					    String st10 = getResources().getString(R.string.have_you_removed);
-					    Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, 1)
+					    Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, Toast.LENGTH_LONG)
 					    .show();
 					    ChatActivity.activityInstance.finish();
 					}
@@ -603,5 +623,9 @@ public class MainActivity extends BaseActivity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		//getMenuInflater().inflate(R.menu.context_tab_contact, menu);
 	}
-	
+
+	@Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+			@NonNull int[] grantResults) {
+		PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+	}
 }

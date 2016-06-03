@@ -5,6 +5,24 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Toast;
+
 import com.easemob.redpacketui.RedPacketConstant;
 import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.easemob.redpacketui.widget.ChatRowRedPacket;
@@ -12,6 +30,7 @@ import com.easemob.redpacketui.widget.ChatRowRedPacketAck;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMGroup;
+import com.hyphenate.chat.EMGroupManager;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.chatuidemo.Constant;
@@ -22,7 +41,7 @@ import com.hyphenate.chatuidemo.domain.RobotUser;
 import com.hyphenate.chatuidemo.widget.ChatRowVoiceCall;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
-import com.hyphenate.easeui.ui.EaseChatFragment.EaseChatFragmentListener;
+import com.hyphenate.easeui.ui.EaseChatFragment.EaseChatFragmentHelper;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenu;
@@ -30,22 +49,7 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EasyUtils;
 import com.hyphenate.util.PathUtil;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.media.ThumbnailUtils;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Toast;
-
-public class ChatFragment extends EaseChatFragment implements EaseChatFragmentListener{
+public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHelper{
 
     //避免和基类定义的常量可能发生的冲突，常量从11开始定义
     private static final int ITEM_VIDEO = 11;
@@ -58,7 +62,9 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
     private static final int REQUEST_CODE_SELECT_FILE = 12;
     private static final int REQUEST_CODE_GROUP_DETAIL = 13;
     private static final int REQUEST_CODE_CONTEXT_MENU = 14;
-    private static final int REQUEST_CODE_SEND_MONEY = 15;
+    private static final int REQUEST_CODE_SELECT_AT_USER = 15;
+    
+    private static final int REQUEST_CODE_SEND_MONEY = 16;
 
     private static final int MESSAGE_TYPE_SENT_VOICE_CALL = 1;
     private static final int MESSAGE_TYPE_RECV_VOICE_CALL = 2;
@@ -104,9 +110,27 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
             }
         });
         ((EaseEmojiconMenu)inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
-        if (chatType == Constant.CHATTYPE_GROUP) {
+        if(chatType == EaseConstant.CHATTYPE_GROUP){
+            inputMenu.getPrimaryMenu().getEditText().addTextChangedListener(new TextWatcher() {
+                
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(count == 1 && "@".equals(String.valueOf(s.charAt(start)))){
+                        startActivityForResult(new Intent(getActivity(), PickAtUserActivity.class).
+                                putExtra("groupId", toChatUsername), REQUEST_CODE_SELECT_AT_USER);
+                    }
+                }
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    
+                }
+                @Override
+                public void afterTextChanged(Editable s) {
+                    
+                } 
+            });
             EMGroup group = EMClient.getInstance().groupManager().getGroup(toChatUsername);
-            if (group == null||group.getAffiliationsCount() <= 0){
+            if(group == null || group.getAffiliationsCount() <= 0){
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -144,7 +168,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
         if (requestCode == REQUEST_CODE_CONTEXT_MENU) {
             switch (resultCode) {
             case ContextMenuActivity.RESULT_CODE_COPY: // 复制消息
-                clipboard.setText(((EMTextMessageBody) contextMenuMessage.getBody()).getMessage());
+                clipboard.setPrimaryClip(ClipData.newPlainText(null, 
+                        ((EMTextMessageBody) contextMenuMessage.getBody()).getMessage()));
                 break;
             case ContextMenuActivity.RESULT_CODE_DELETE: // 删除消息
                 conversation.removeMessage(contextMenuMessage.getMsgId());
@@ -188,6 +213,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
                     }
                 }
                 break;
+            case REQUEST_CODE_SELECT_AT_USER:
+                if(data != null){
+                    String username = data.getStringExtra("username");
+                    inputAtUsername(username, false);
+                }
+                break;
+
             case REQUEST_CODE_SEND_MONEY:
                 if (data != null){
                     sendMessage(RedPacketUtil.createRPMessage(getActivity(), data, toChatUsername));
@@ -238,6 +270,12 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
         intent.putExtra("username", username);
         startActivity(intent);
     }
+    
+    @Override
+    public void onAvatarLongClick(String username) {
+        inputAtUsername(username);
+    }
+    
     
     @Override
     public boolean onMessageBubbleClick(EMMessage message) {
@@ -390,5 +428,5 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentLi
         }
 
     }
-    
+
 }
