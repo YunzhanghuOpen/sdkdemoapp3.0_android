@@ -50,7 +50,8 @@ public class RedPacketUtil {
                 @Override
                 public void run() {
                     try {
-                        EMGroupManager.getInstance().getGroupFromServer(toChatUsername);
+                        EMGroup returnGroup = EMGroupManager.getInstance().getGroupFromServer(toChatUsername);
+                        EMGroupManager.getInstance().createOrUpdateLocalGroup(returnGroup);
                     } catch (EaseMobException e) {
                         e.printStackTrace();
                     }
