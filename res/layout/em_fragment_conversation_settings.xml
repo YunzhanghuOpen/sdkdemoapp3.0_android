@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="10dip"
-                    android:text="@string/rp_record"
+                    android:text="@string/change"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
                     />
