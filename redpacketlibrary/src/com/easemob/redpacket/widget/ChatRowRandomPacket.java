@@ -36,7 +36,7 @@ public class ChatRowRandomPacket extends EaseChatRow {
 
     @Override
     protected void onSetUpView() {
-        String greetings = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_GREETING, "");
+        String greetings = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_GREETING, "");
         mTvGreeting.setText(greetings);
     }
 

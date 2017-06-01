@@ -38,12 +38,12 @@ public class ChatRowRedPacket extends EaseChatRow {
 
     @Override
     protected void onSetUpView() {
-        String sponsorName = message.getStringAttribute(RPConstant.EXTRA_SPONSOR_NAME, "");
-        String greetings = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_GREETING, "");
+        String sponsorName = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SPONSOR_NAME, "");
+        String greetings = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_GREETING, "");
         mTvGreeting.setText(greetings);
         mTvSponsorName.setText(sponsorName);
-        String packetType = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_TYPE, "");
-        if (!TextUtils.isEmpty(packetType) && TextUtils.equals(packetType, RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
+        String redPacketType = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_TYPE, "");
+        if (!TextUtils.isEmpty(redPacketType) && TextUtils.equals(redPacketType, RPConstant.RED_PACKET_TYPE_GROUP_EXCLUSIVE)) {
             mTvPacketType.setVisibility(VISIBLE);
             mTvPacketType.setText(R.string.exclusive_red_packet);
         } else {

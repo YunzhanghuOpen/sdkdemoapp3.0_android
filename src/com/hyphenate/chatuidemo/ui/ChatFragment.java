@@ -280,7 +280,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         for (EMMessage message : messages) {
             EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
             String action = cmdMsgBody.action();//获取自定义action
-            if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+            if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)){
                 RedPacketUtil.receiveRedPacketAckMessage(message);
                 messageList.refresh();
             }

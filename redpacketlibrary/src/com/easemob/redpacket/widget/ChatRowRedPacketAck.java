@@ -34,22 +34,22 @@ public class ChatRowRedPacketAck extends EaseChatRow {
     @Override
     protected void onSetUpView() {
         String currentUser = EMClient.getInstance().getCurrentUser();
-        String fromUser = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_NAME, "");//红包发送者
-        String toUser = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");//红包接收者
+        String senderNickname = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_NICKNAME, "");//红包发送者
+        String receiverNickname = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_RECEIVER_NICKNAME, "");//红包接收者
         String senderId;
         if (message.direct() == EMMessage.Direct.SEND) {
             if (message.getChatType().equals(EMMessage.ChatType.GroupChat)) {
-                senderId = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_ID, "");
+                senderId = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_ID, "");
                 if (senderId.equals(currentUser)) {
                     mTvMessage.setText(R.string.msg_take_red_packet);
                 } else {
-                    mTvMessage.setText(String.format(getResources().getString(R.string.msg_take_someone_red_packet), fromUser));
+                    mTvMessage.setText(String.format(getResources().getString(R.string.msg_take_someone_red_packet), senderNickname));
                 }
             } else {
-                mTvMessage.setText(String.format(getResources().getString(R.string.msg_take_someone_red_packet), fromUser));
+                mTvMessage.setText(String.format(getResources().getString(R.string.msg_take_someone_red_packet), senderNickname));
             }
         } else {
-            mTvMessage.setText(String.format(getResources().getString(R.string.msg_someone_take_red_packet), toUser));
+            mTvMessage.setText(String.format(getResources().getString(R.string.msg_someone_take_red_packet), receiverNickname));
         }
     }
 
