@@ -1,4 +1,4 @@
-package com.easemob.redpacket.widget;
+package com.hyphenate.chatuidemo.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -6,10 +6,10 @@ import android.content.res.Resources;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.easemob.redpacket.R;
-import com.easemob.redpacket.utils.RedPacketUtil;
 import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chatuidemo.R;
+import com.hyphenate.chatuidemo.utils.RedPacketUtil;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 
 public class ChatRowRandomPacket extends EaseChatRow {

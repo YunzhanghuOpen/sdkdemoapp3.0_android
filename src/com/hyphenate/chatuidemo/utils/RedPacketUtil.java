@@ -1,4 +1,4 @@
-package com.easemob.redpacket.utils;
+package com.hyphenate.chatuidemo.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.easemob.redpacket.R;
 import com.easemob.redpacketsdk.RPGroupMemberListener;
 import com.easemob.redpacketsdk.RPSendPacketCallback;
 import com.easemob.redpacketsdk.RPValueCallback;
@@ -20,6 +19,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chatuidemo.R;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;

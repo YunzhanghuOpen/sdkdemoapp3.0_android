@@ -1,4 +1,4 @@
-package com.easemob.redpacket.widget;
+package com.hyphenate.chatuidemo.widget;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.easemob.redpacket.R;
 import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chatuidemo.R;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 
 public class ChatRowRedPacket extends EaseChatRow {
