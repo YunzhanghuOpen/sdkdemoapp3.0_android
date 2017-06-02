@@ -42,6 +42,7 @@ android {
         minSdkVersion 11
         targetSdkVersion 22
         multiDexEnabled true
+        resValue "string", "rp_provider_authorities_name", "${applicationId}.redpacket.fileProvider"
     }
 
     sourceSets {
