@@ -105,12 +105,12 @@ public class RedPacketUtil {
     /**
      * 拆红包的方法
      *
-     * @param activity       FragmentActivity
-     * @param chatType       聊天类型
-     * @param message        EMMessage
-     * @param messageList    EaseChatMessageList
+     * @param activity    FragmentActivity
+     * @param chatType    聊天类型
+     * @param message     EMMessage
+     * @param messageList EaseChatMessageList
      */
-    public static void openRedPacket(final FragmentActivity activity, final int chatType, final EMMessage message, final EaseChatMessageList messageList) {
+    public static void openRedPacket(final FragmentActivity activity, final int chatType, final EMMessage message, final String toChatUsername, final EaseChatMessageList messageList) {
         final ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCanceledOnTouchOutside(false);
         String redPacketId = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_ID, "");
@@ -121,7 +121,7 @@ public class RedPacketUtil {
                 //领取红包成功 发送消息到聊天窗口
                 if (chatType == EaseConstant.CHATTYPE_SINGLE) {
                     if (!isRandomRedPacket(message)) {
-                        EMMessage msg = EMMessage.createTxtSendMessage(String.format(activity.getResources().getString(R.string.msg_someone_take_red_packet), redPacketInfo.receiverNickname), redPacketInfo.receiverId);
+                        EMMessage msg = EMMessage.createTxtSendMessage(String.format(activity.getResources().getString(R.string.msg_someone_take_red_packet), redPacketInfo.receiverNickname), toChatUsername);
                         msg.setAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, true);
                         msg.setAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_RECEIVER_NICKNAME, redPacketInfo.receiverNickname);
                         msg.setAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_NICKNAME, redPacketInfo.senderNickname);
