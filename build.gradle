@@ -17,7 +17,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {  url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
+        maven {
+            url "https://raw.githubusercontent.com/YunzhanghuOpen/redpacket-maven-repo/master/release"
+        }
     }
 }
 
@@ -28,7 +30,7 @@ apply plugin: 'com.android.application'
 
 // ========== fabric start
 repositories {
-   // maven { url 'https://maven.fabric.io/public' }
+    // maven { url 'https://maven.fabric.io/public' }
 }
 // ========== fabric end
 
@@ -42,9 +44,10 @@ android {
         minSdkVersion 9
         targetSdkVersion 22
         multiDexEnabled true
+        resValue "string", "rp_provider_authorities_name", "${applicationId}.redpacket.fileProvider"
     }
 
-	sourceSets {
+    sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
