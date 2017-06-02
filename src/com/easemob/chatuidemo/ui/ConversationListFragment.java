@@ -71,8 +71,8 @@ public class ConversationListFragment extends EaseConversationListFragment{
             @Override
             public String onSetItemSecondaryText(EMMessage lastMessage) {
                 if (lastMessage.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
-                    String sendNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_NAME, "");
-                    String receiveNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");
+                    String sendNick = lastMessage.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_NICKNAME, "");
+                    String receiveNick = lastMessage.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_RECEIVER_NICKNAME, "");
                     String msg;
                     if (lastMessage.direct == EMMessage.Direct.RECEIVE) {
                         msg = String.format(getResources().getString(R.string.msg_someone_take_red_packet), receiveNick);
@@ -82,15 +82,6 @@ public class ConversationListFragment extends EaseConversationListFragment{
                         } else {
                             msg = String.format(getResources().getString(R.string.msg_take_someone_red_packet), sendNick);
                         }
-                    }
-                    return msg;
-                } else if (lastMessage.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
-                    String transferAmount = lastMessage.getStringAttribute(RPConstant.EXTRA_TRANSFER_AMOUNT, "");
-                    String msg;
-                    if (lastMessage.direct == EMMessage.Direct.RECEIVE) {
-                        msg =  String.format(getResources().getString(R.string.msg_transfer_to_you), transferAmount);
-                    } else {
-                        msg =  String.format(getResources().getString(R.string.msg_transfer_from_you),transferAmount);
                     }
                     return msg;
                 }

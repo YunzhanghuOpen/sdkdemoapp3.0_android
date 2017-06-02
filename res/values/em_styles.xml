@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MoneyIconStyle">
+    <style name="RedPacketIconStyle">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginTop">15dp</item>
     </style>
 
-    <style name="MoneyGreetingStyle">
+    <style name="RedPacketGreetingStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dp</item>
@@ -20,7 +20,7 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="MoneyCheckStyle">
+    <style name="RedPacketCheckStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignBaseline">@id/iv_money_icon</item>
@@ -31,7 +31,7 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="MoneySponsorStyle">
+    <style name="RedPacketSponsorStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dp</item>
@@ -41,7 +41,7 @@
         <item name="android:layout_marginTop">3dp</item>
     </style>
 
-    <style name="MoneySponsorIconStyle">
+    <style name="RedPacketSponsorIconStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentRight">true</item>

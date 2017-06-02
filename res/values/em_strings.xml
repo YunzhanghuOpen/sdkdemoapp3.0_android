@@ -314,5 +314,13 @@
      <string name="network_unstable">Network unstable</string>
     <string name="no_call_data">No call data</string>
     <string name="adaptive_video_encode">Adaptive video encode</string>
+    <!--红包相关-->
+    <string name="msg_take_red_packet">You got your own Red Packet</string>
+    <string name="msg_take_someone_red_packet">You got Red Packet from %1$s</string>
+    <string name="msg_someone_take_red_packet">%1$s got your Red Packet</string>
+    <string name="easemob_red_packet">Easemob Red Packet</string>
+    <string name="attach_red_packet">Red Packet</string>
+    <string name="rp_record">Red Packet Record</string>
+    <string name="exclusive_red_packet">Exclusive Red Packet</string>
 
 </resources>

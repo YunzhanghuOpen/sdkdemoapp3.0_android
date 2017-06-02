@@ -29,6 +29,10 @@ import com.easemob.chatuidemo.DemoHelper;
 import com.easemob.chatuidemo.R;
 import com.easemob.chatuidemo.domain.EmojiconExampleGroupData;
 import com.easemob.chatuidemo.domain.RobotUser;
+import com.easemob.chatuidemo.utils.RedPacketUtil;
+import com.easemob.chatuidemo.widget.ChatRowRandomPacket;
+import com.easemob.chatuidemo.widget.ChatRowRedPacket;
+import com.easemob.chatuidemo.widget.ChatRowRedPacketAck;
 import com.easemob.chatuidemo.widget.ChatRowVoiceCall;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.ui.EaseChatFragment;
@@ -40,11 +44,8 @@ import com.easemob.easeui.widget.emojicon.EaseEmojiconMenu;
 import com.easemob.redpacketsdk.RPSendPacketCallback;
 import com.easemob.redpacketsdk.bean.RedPacketInfo;
 import com.easemob.redpacketsdk.constant.RPConstant;
-import com.easemob.redpacket.utils.RedPacketUtil;
-import com.easemob.redpacket.widget.ChatRowRandomPacket;
-import com.easemob.redpacket.widget.ChatRowRedPacket;
-import com.easemob.redpacket.widget.ChatRowRedPacketAck;
 import com.easemob.util.PathUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -225,7 +226,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 EMMessage cmdMessage = (EMMessage) event.getData();
                 CmdMessageBody cmdMsgBody = (CmdMessageBody) cmdMessage.getBody();
                 final String action = cmdMsgBody.action;//获取自定义action
-                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+                if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)) {
                     RedPacketUtil.receiveRedPacketAckMessage(cmdMessage);
                     messageList.refresh();
                 }
@@ -295,7 +296,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         //消息框点击事件，demo这里不做覆盖，如需覆盖，return true
         //red packet code : 拆红包页面
         if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)){
-            RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList);
+            RedPacketUtil.openRedPacket(getActivity(), chatType, message, messageList);
             return true;
         }
         //end of red packet code

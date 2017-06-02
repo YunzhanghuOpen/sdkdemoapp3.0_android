@@ -43,6 +43,7 @@ import com.easemob.chatuidemo.ui.MainActivity;
 import com.easemob.chatuidemo.ui.VideoCallActivity;
 import com.easemob.chatuidemo.ui.VoiceCallActivity;
 import com.easemob.chatuidemo.utils.PreferenceManager;
+import com.easemob.chatuidemo.utils.RedPacketUtil;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.R;
 import com.easemob.easeui.controller.EaseUI;
@@ -58,7 +59,6 @@ import com.easemob.easeui.utils.EaseACKUtil;
 import com.easemob.easeui.utils.EaseCommonUtils;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.redpacketsdk.constant.RPConstant;
-import com.easemob.redpacket.utils.RedPacketUtil;
 import com.easemob.util.EMLog;
 
 import java.util.ArrayList;
@@ -714,9 +714,9 @@ public class DemoHelper {
                             EaseCommonUtils.receiveRevokeMessage(appContext, message);
                         }
                         //red packet code : 处理红包回执透传消息
-                        if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+                        if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)){
                             RedPacketUtil.receiveRedPacketAckMessage(message);
-                            broadcastManager.sendBroadcast(new Intent(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION));
+                            broadcastManager.sendBroadcast(new Intent(RPConstant.REFRESH_RED_PACKET_ACK_ACTION));
                         }
                         //end of red packet code
                     }
@@ -734,7 +734,7 @@ public class DemoHelper {
                             public void onReceive(Context context, Intent intent) {
                                 // TODO Auto-generated method stub
                                 //red packet code : 过滤掉红包回执消息的toast
-                                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+                                if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)){
                                     return;
                                 }
                                 //end of red packet code
