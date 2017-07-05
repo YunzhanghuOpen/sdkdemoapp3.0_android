@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 11
@@ -45,7 +45,10 @@ android {
 }
 
 dependencies {
+    compile('com.android.support:recyclerview-v7:25.3.1') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
     compile project(':EaseUI')
-    compile 'com.hyphenate.redpacket:redpacket-wallet:3.4.6'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
 }

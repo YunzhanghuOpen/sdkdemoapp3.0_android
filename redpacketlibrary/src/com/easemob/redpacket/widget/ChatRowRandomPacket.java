@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import com.easemob.redpacket.R;
 import com.easemob.redpacket.utils.RedPacketUtil;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ChatRowRandomPacket extends EaseChatRow {
 
@@ -36,7 +36,7 @@ public class ChatRowRandomPacket extends EaseChatRow {
 
     @Override
     protected void onSetUpView() {
-        String greetings = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_GREETING, "");
+        String greetings = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_GREETING, "");
         mTvGreeting.setText(greetings);
     }
 

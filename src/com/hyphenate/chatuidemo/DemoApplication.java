@@ -18,15 +18,15 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
-import com.easemob.redpacketsdk.RPInitRedPacketCallback;
-import com.easemob.redpacketsdk.RPValueCallback;
-import com.easemob.redpacketsdk.RedPacket;
-import com.easemob.redpacketsdk.bean.RedPacketInfo;
-import com.easemob.redpacketsdk.bean.TokenData;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.yunzhanghu.redpacketsdk.RPInitRedPacketCallback;
+import com.yunzhanghu.redpacketsdk.RPValueCallback;
+import com.yunzhanghu.redpacketsdk.RedPacket;
+import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
+import com.yunzhanghu.redpacketsdk.bean.TokenData;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 // ============== fabric start
 //import com.crashlytics.android.Crashlytics;
 //import io.fabric.sdk.android.Fabric;
@@ -57,7 +57,7 @@ public class DemoApplication extends Application {
         //init demo helper
         DemoHelper.getInstance().init(applicationContext);
 		//red packet code : 初始化红包SDK，开启日志输出开关
-		RedPacket.getInstance().initRedPacket(applicationContext, RPConstant.AUTH_METHOD_EASEMOB, new RPInitRedPacketCallback() {
+		RedPacket.getInstance().initRedPacket(applicationContext, RPConstant.AUTH_METHOD_EASE_MOB, new RPInitRedPacketCallback() {
 
 			@Override
 			public void initTokenData(RPValueCallback<TokenData> callback) {
@@ -73,17 +73,17 @@ public class DemoApplication extends Application {
 			@Override
 			public RedPacketInfo initCurrentUserSync() {
 				//这里需要同步设置当前用户id、昵称和头像url
-				String fromAvatarUrl = "";
-				String fromNickname = EMClient.getInstance().getCurrentUser();
-				EaseUser easeUser = EaseUserUtils.getUserInfo(fromNickname);
+				String currentAvatarUrl = "";
+				String currentNickname = EMClient.getInstance().getCurrentUser();
+				EaseUser easeUser = EaseUserUtils.getUserInfo(currentNickname);
 				if (easeUser != null) {
-					fromAvatarUrl = TextUtils.isEmpty(easeUser.getAvatar()) ? "none" : easeUser.getAvatar();
-					fromNickname = TextUtils.isEmpty(easeUser.getNick()) ? easeUser.getUsername() : easeUser.getNick();
+					currentAvatarUrl = TextUtils.isEmpty(easeUser.getAvatar()) ? "none" : easeUser.getAvatar();
+					currentNickname = TextUtils.isEmpty(easeUser.getNick()) ? easeUser.getUsername() : easeUser.getNick();
 				}
 				RedPacketInfo redPacketInfo = new RedPacketInfo();
-				redPacketInfo.fromUserId = EMClient.getInstance().getCurrentUser();
-				redPacketInfo.fromAvatarUrl = fromAvatarUrl;
-				redPacketInfo.fromNickName = fromNickname;
+				redPacketInfo.currentUserId = EMClient.getInstance().getCurrentUser();
+				redPacketInfo.currentAvatarUrl = currentAvatarUrl;
+				redPacketInfo.currentNickname = currentNickname;
 				return redPacketInfo;
 			}
 		});

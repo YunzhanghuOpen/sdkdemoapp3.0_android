@@ -10,7 +10,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacket.utils.RedPacketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMConnectionListener;
@@ -55,6 +54,7 @@ import com.hyphenate.easeui.model.EaseNotifier.EaseNotificationInfoProvider;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -855,9 +855,9 @@ public class DemoHelper {
                     final String action = cmdMsgBody.action();//获取自定义action
                     //red packet code : 处理红包回执透传消息
                     if(!easeUI.hasForegroundActivies()){
-                        if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+                        if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)){
                             RedPacketUtil.receiveRedPacketAckMessage(message);
-                            broadcastManager.sendBroadcast(new Intent(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION));
+                            broadcastManager.sendBroadcast(new Intent(RPConstant.REFRESH_RED_PACKET_ACK_ACTION));
                         }
                     }
 
