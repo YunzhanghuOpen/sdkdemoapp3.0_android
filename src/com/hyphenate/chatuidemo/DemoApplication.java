@@ -18,15 +18,15 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
-import com.easemob.redpacketsdk.RPInitRedPacketCallback;
-import com.easemob.redpacketsdk.RPValueCallback;
-import com.easemob.redpacketsdk.RedPacket;
-import com.easemob.redpacketsdk.bean.RedPacketInfo;
-import com.easemob.redpacketsdk.bean.TokenData;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.yunzhanghu.redpacketsdk.RPInitRedPacketCallback;
+import com.yunzhanghu.redpacketsdk.RPValueCallback;
+import com.yunzhanghu.redpacketsdk.RedPacket;
+import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
+import com.yunzhanghu.redpacketsdk.bean.TokenData;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 // ============== fabric start
 //import com.crashlytics.android.Crashlytics;
 //import io.fabric.sdk.android.Fabric;

@@ -4,11 +4,11 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ChatRowRedPacketAck extends EaseChatRow {
 

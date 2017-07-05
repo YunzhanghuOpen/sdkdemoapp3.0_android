@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
-
 android {
-    compileSdkVersion 23
+    compileSdkVersion 22
     buildToolsVersion "23.0.1"
 
     defaultConfig {
@@ -18,11 +17,10 @@ android {
     }
 
 }
-
 dependencies {
     compile files('libs/alipaySdk-20161129.jar')
     compile files('libs/volley-1.0.19.jar')
-    compile 'com.hyphenate.redpacket:redpacket-sdk-alipay:2.0.0'
+    compile 'com.yunzhanghu.redpacket:redpacket-sdk-alipay:2.0.1'
     compile('com.android.support:recyclerview-v7:23.3.0') {
         transitive = false
     }
