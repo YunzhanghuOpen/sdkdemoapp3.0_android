@@ -36,7 +36,7 @@ import com.easemob.chatuidemo.DemoHelper;
 import com.easemob.chatuidemo.DemoModel;
 import com.easemob.chatuidemo.R;
 import com.easemob.easeui.widget.EaseSwitchButton;
-import com.easemob.redpacketui.utils.RPRedPacketUtil;
+import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
 
 /**
  * 设置界面

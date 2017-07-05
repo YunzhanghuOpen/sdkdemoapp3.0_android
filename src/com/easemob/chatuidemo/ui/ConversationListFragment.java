@@ -21,8 +21,8 @@ import com.easemob.chatuidemo.R;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.easeui.ui.EaseConversationListFragment;
 import com.easemob.easeui.widget.EaseConversationList.EaseConversationListHelper;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.util.NetUtils;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ConversationListFragment extends EaseConversationListFragment{
 

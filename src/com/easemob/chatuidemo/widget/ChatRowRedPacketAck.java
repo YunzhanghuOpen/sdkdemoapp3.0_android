@@ -8,7 +8,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.R;
 import com.easemob.easeui.widget.chatrow.EaseChatRow;
-import com.easemob.redpacketsdk.constant.RPConstant;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ChatRowRedPacketAck extends EaseChatRow {
 

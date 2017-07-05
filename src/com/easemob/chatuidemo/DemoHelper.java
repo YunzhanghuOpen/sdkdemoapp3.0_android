@@ -58,8 +58,8 @@ import com.easemob.easeui.model.EaseNotifier.EaseNotificationInfoProvider;
 import com.easemob.easeui.utils.EaseACKUtil;
 import com.easemob.easeui.utils.EaseCommonUtils;
 import com.easemob.exceptions.EaseMobException;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.util.EMLog;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;

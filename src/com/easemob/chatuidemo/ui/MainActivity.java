@@ -49,11 +49,11 @@ import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.utils.RedPacketUtil;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.utils.EaseCommonUtils;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.util.NetUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.xiaomi.mipush.sdk.MiPushClient;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class MainActivity extends BaseActivity implements EMEventListener {
 
