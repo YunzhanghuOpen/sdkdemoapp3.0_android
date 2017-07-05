@@ -37,14 +37,15 @@ import com.easemob.easeui.utils.EaseCommonUtils;
 import com.easemob.easeui.widget.chatrow.EaseChatRow;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.easemob.easeui.widget.emojicon.EaseEmojiconMenu;
-import com.easemob.redpacketsdk.RPSendPacketCallback;
-import com.easemob.redpacketsdk.bean.RedPacketInfo;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacket.utils.RedPacketUtil;
 import com.easemob.redpacket.widget.ChatRowRandomPacket;
 import com.easemob.redpacket.widget.ChatRowRedPacket;
 import com.easemob.redpacket.widget.ChatRowRedPacketAck;
 import com.easemob.util.PathUtil;
+import com.yunzhanghu.redpacketsdk.RPSendPacketCallback;
+import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -225,7 +226,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 EMMessage cmdMessage = (EMMessage) event.getData();
                 CmdMessageBody cmdMsgBody = (CmdMessageBody) cmdMessage.getBody();
                 final String action = cmdMsgBody.action;//获取自定义action
-                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+                if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)) {
                     RedPacketUtil.receiveRedPacketAckMessage(cmdMessage);
                     messageList.refresh();
                 }

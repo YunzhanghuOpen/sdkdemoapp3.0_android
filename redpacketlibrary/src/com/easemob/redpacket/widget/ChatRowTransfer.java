@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.easemob.chat.EMMessage;
 import com.easemob.easeui.widget.chatrow.EaseChatRow;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacket.R;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ChatRowTransfer extends EaseChatRow {
 
@@ -32,7 +32,7 @@ public class ChatRowTransfer extends EaseChatRow {
 
     @Override
     protected void onSetUpView() {
-        String transferAmount = message.getStringAttribute(RPConstant.EXTRA_TRANSFER_AMOUNT, "");
+        String transferAmount = message.getStringAttribute(RPConstant.MESSAGE_ATTR_TRANSFER_AMOUNT, "");
         mTvTransfer.setText(String.format("%s元", transferAmount));
     }
 

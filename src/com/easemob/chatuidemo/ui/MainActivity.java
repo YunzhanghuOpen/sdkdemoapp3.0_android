@@ -48,12 +48,12 @@ import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.utils.EaseCommonUtils;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacket.utils.RedPacketUtil;
 import com.easemob.util.NetUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.xiaomi.mipush.sdk.MiPushClient;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class MainActivity extends BaseActivity implements EMEventListener {
 
@@ -214,7 +214,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 EaseCommonUtils.receiveRevokeMessage(this, cmdMessage);
             }
 			//red packet code : 处理红包回执透传消息
-			if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+			if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)) {
 				RedPacketUtil.receiveRedPacketAckMessage(cmdMessage);
 			}
 			//end of red packet code
@@ -271,7 +271,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
         intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
-		intentFilter.addAction(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION);
+		intentFilter.addAction(RPConstant.REFRESH_RED_PACKET_ACK_ACTION);
         broadcastReceiver = new BroadcastReceiver() {
             
             @Override
@@ -295,7 +295,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     }
                 }
 				//red packet code : 会话列表页面刷新红包回执消息
-				if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+				if (action.equals(RPConstant.REFRESH_RED_PACKET_ACK_ACTION)){
 					if (conversationListFragment != null){
 						conversationListFragment.refresh();
 					}

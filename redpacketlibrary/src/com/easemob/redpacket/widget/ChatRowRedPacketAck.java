@@ -7,8 +7,8 @@ import android.widget.TextView;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.easeui.widget.chatrow.EaseChatRow;
-import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacket.R;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ChatRowRedPacketAck extends EaseChatRow {
 
@@ -34,12 +34,12 @@ public class ChatRowRedPacketAck extends EaseChatRow {
     @Override
     protected void onSetUpView() {
         String currentUser = EMChatManager.getInstance().getCurrentUser();
-        String fromUser = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_NAME, "");//红包发送者
-        String toUser = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");//红包接收者
+        String fromUser = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_NICKNAME, "");//红包发送者
+        String toUser = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_RECEIVER_NICKNAME, "");//红包接收者
         String senderId;
         if (message.direct == EMMessage.Direct.SEND) {
             if (message.getChatType().equals(EMMessage.ChatType.GroupChat)) {
-                senderId = message.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_ID, "");
+                senderId = message.getStringAttribute(RPConstant.MESSAGE_ATTR_RED_PACKET_SENDER_ID, "");
                 if (senderId.equals(currentUser)) {
                     mTvMessage.setText(R.string.msg_take_red_packet);
                 } else {

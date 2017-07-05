@@ -21,7 +21,7 @@ import com.easemob.chat.EMMessage;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.R;
 import com.easemob.easeui.EaseConstant;
-import com.easemob.redpacketsdk.constant.RPConstant;
+import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
 public class ContextMenuActivity extends BaseActivity {
 	public static final int RESULT_CODE_COPY = 1;

@@ -46,6 +46,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.hyphenate.redpacket:redpacket-wallet:3.4.6'
+    compile('com.android.support:recyclerview-v7:23.3.0') {
+        transitive = false
+    }
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.0'
     compile project(':EaseUI')
 }
