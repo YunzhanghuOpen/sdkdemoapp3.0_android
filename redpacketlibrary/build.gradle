@@ -49,6 +49,6 @@ dependencies {
         transitive = false
     }
     compile project(':EaseUI')
-    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.0'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
 }
