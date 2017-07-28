@@ -90,10 +90,4 @@ dependencies {
     compile project(':redpacketlibrary')
     compile project(':EaseUI')
     compile fileTree(include: '*.jar', exclude: 'android-support-multidex.jar', dir: 'libs')
-
-    // ========== fabric start
-    //compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
-    //    transitive = true;
-    //}
-    // ========== fabric end
 }
