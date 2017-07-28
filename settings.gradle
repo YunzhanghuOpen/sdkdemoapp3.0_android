@@ -1,2 +1,1 @@
 include ':EaseUI',  ':redpacketui-open'
-project(':EaseUI').projectDir = new File('../easeui')
